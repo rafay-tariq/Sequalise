@@ -14,12 +14,12 @@ sequelize
     console.log("Error" + err);
   });
 
-// const db = {};
-// db.Sequelize = Sequelize;
-// db.sequelize = sequelize;
+const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-// db.users = require("./models/users")(sequelize);
-sequelize.sync({ force: true }).then(() => {
+db.users = require("../models/users")(sequelize);
+sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync");
 });
 

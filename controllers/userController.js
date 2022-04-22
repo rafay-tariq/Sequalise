@@ -1,12 +1,19 @@
 // var db = require("../models");
-const User = require("../models/users");
+const Users = require("../models/users");
+const db = require("../database/db");
 
 var addUser = async (req, res) => {
-  let data = await User;
-  await data.save();
+  console.log("inside the uer controller");
+
+  let data = await db.users.create({
+    name: "rafay",
+    email: "rafay@gmail.com",
+    gender: "male",
+  });
+  console.log("data", data.dataValues);
   let response = {
     data: "ok",
   };
-  res.status(200).json(response);
+  return res.status(200).json(data.dataValues);
 };
-module.exports = addUser;
+module.exports = { addUser };
