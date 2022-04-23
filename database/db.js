@@ -19,6 +19,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require("../models/users")(sequelize);
+db.posts = require("../models/posts")(sequelize);
 sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync");
 });
