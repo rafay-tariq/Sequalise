@@ -24,4 +24,11 @@ sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync");
 });
 
+db.users.hasOne(db.posts, {
+  foreignKey: "user_id",
+});
+db.posts.belongsTo(db.users, {
+  foreignKey: "user_id",
+});
+
 module.exports = db;

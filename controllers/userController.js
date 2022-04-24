@@ -1,7 +1,7 @@
-// var db = require("../models");
-const Users = require("../models/users");
 const db = require("../database/db");
 const { Sequelize } = require("sequelize");
+const User = db.users;
+const Post = db.posts;
 var addUser = async (req, res) => {
   console.log("inside the uer controller");
 
@@ -25,9 +25,21 @@ var addUser = async (req, res) => {
 };
 
 var oneToOne = async (req, res) => {
-  let response = {
-    data: "ok",
-  };
-  return res.status(200).json(response);
+  const data = await User.findAll({
+    attributes: ["name", "email"],
+    include: [{ model: Post, attributes: ["name"] }],
+    where: { id: 8 },
+  });
+  return res.status(200).json(data);
 };
-module.exports = { addUser, oneToOne };
+var belongsTo = async (req, res) => {
+  const data = await Post.findAll({
+    // attributes: ["name", "email"],
+    // include: [{ model: Post, attributes: ["name"] }],
+    // where: { id: 8 },
+    include: User,
+  });
+
+  return res.status(200).json(data);
+};
+module.exports = { addUser, oneToOne, belongsTo };

@@ -9,6 +9,7 @@ app.get("/", (res, resp) => {
 
 app.get("/add", userController.addUser);
 app.get("/oneToOne", userController.oneToOne);
+app.get("/belongsTo", userController.belongsTo);
 
 app.listen(port, () => {
   console.log(`App is listening at http://localhost:${port}`);
